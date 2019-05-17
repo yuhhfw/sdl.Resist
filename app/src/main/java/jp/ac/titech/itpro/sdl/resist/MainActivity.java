@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         float omegaZ = event.values[2];  // z-axis angular velocity (rad/sec)
         // TODO: calculate right direction that cancels the rotation
-        //元が角速度(rad/ns)なので*0.000000001して秒数を利用する？
+        //元が角速度(rad/ns)なので*0.000000001して秒数を利用する
+        //予定だったが区分求積法のスタイル的に0.0000000009の方がずれない...
         now_omegaZ += omegaZ * (event.timestamp - temp_timestamp) * 0.0000000009;
         rotationView.setDirection(now_omegaZ);
         temp_timestamp = event.timestamp;
